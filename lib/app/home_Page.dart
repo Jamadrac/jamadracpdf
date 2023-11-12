@@ -14,7 +14,21 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
-    // pdfControllerPinch = PdfControllerPinch(document: PdfDocument());
+    pdfControllerPinch = PdfControllerPinch(
+      document: PdfDocument.openAsset('assets/pdfs/flutter_tutorial.pdf'),
+    );
+  }
+
+  Widget _buildUI() {
+    return Column(
+      children: [
+        _pdfView(),
+      ],
+    );
+  }
+
+  Widget _pdfView() {
+    return Expanded(child: PdfViewPinch(controller: pdfControllerPinch));
   }
 
   @override
@@ -27,6 +41,7 @@ class _HomePageState extends State<HomePage> {
         ),
         backgroundColor: Colors.red,
       ),
+      body: _buildUI(),
     );
   }
 }
