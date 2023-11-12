@@ -9,6 +9,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  int totalPageCount = 0, currentPage = 1;
   late PdfControllerPinch pdfControllerPinch;
 
   @override
@@ -22,13 +23,48 @@ class _HomePageState extends State<HomePage> {
   Widget _buildUI() {
     return Column(
       children: [
+        Row(
+          mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Text("Total pages ${totalPageCount}"),
+            IconButton(
+              onPressed: () {},
+              icon: const Icon(Icons.arrow_back_ios),
+            ),
+            Text("page $currentPage"),
+            IconButton(
+              onPressed: () {
+                pdfControllerPinch.previousPage(
+                    duration: const Duration(milliseconds: 500),
+                    curve: Curves.linear);
+              },
+              icon: const Icon(Icons.arrow_forward_ios),
+            )
+          ],
+        ),
         _pdfView(),
       ],
     );
   }
 
   Widget _pdfView() {
-    return Expanded(child: PdfViewPinch(controller: pdfControllerPinch));
+    return Expanded(
+        child: PdfViewPinch(
+      scrollDirection: Axis.vertical,
+      controller: pdfControllerPinch,
+      onDocumentLoaded: (doc) {
+        setState(() {
+          totalPageCount = doc.pagesCount;
+        });
+      },
+      onPageChanged: (page) {
+        setState(() {
+          currentPage = page;
+        });
+      },
+    ));
   }
 
   @override
