@@ -1,13 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:pdfx/pdfx.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+  const HomePage({Key? key}) : super(key: key);
 
   @override
   State<HomePage> createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
+  late PdfControllerPinch pdfControllerPinch;
+
+  @override
+  void initState() {
+    super.initState();
+    // pdfControllerPinch = PdfControllerPinch(document: PdfDocument());
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
