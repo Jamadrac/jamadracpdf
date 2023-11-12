@@ -30,7 +30,11 @@ class _HomePageState extends State<HomePage> {
           children: [
             Text("Total pages ${totalPageCount}"),
             IconButton(
-              onPressed: () {},
+              onPressed: () {
+                pdfControllerPinch.nextPage(
+                    duration: const Duration(milliseconds: 500),
+                    curve: Curves.linear);
+              },
               icon: const Icon(Icons.arrow_back_ios),
             ),
             Text("page $currentPage"),
