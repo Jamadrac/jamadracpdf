@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'app/pdf_viewer.dart';
+import 'app/Home.dart';
 
 void main() {
   runApp(const MyApp());
@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
-      home: HomePage(),
+      home: home(),
     );
   }
 }
